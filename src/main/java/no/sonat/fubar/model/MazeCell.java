@@ -1,14 +1,23 @@
 package no.sonat.fubar.model;
 
 public class MazeCell {
-	public int x;
-	public int y;
-	public boolean isNorthOpen;
-	public boolean isSouthOpen;
-	public boolean isWestOpen;
-	public boolean isEastOpen;
+	public final Coordinate pos;
+	public final boolean isNorthOpen;
+	public final boolean isSouthOpen;
+	public final boolean isWestOpen;
+	public final boolean isEastOpen;
 
-	boolean isOrigin(){
-		return ((0==x) && (0 == y));
+	public MazeCell(Coordinate pos, boolean isNorthOpen, boolean isSouthOpen, boolean isWestOpen, boolean isEastOpen
+
+	) {
+		this.pos = pos;
+		this.isNorthOpen = isNorthOpen;
+		this.isSouthOpen = isSouthOpen;
+		this.isWestOpen = isWestOpen;
+		this.isEastOpen = isEastOpen;
+	}
+
+	boolean isOrigin() {
+		return pos.isOrigin();
 	}
 }

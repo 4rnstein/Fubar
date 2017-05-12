@@ -1,7 +1,7 @@
 package no.sonat.fubar.model;
 
 public class Coordinate {
-	public int x, y;
+	public final int x, y;
 
 	public Coordinate(int x, int y) {
 		this.x = x;
@@ -20,5 +20,10 @@ public class Coordinate {
 		}
 		Coordinate p = (Coordinate) o;
 		return (this.x == p.x && this.y == p.y);
+	}
+
+	public boolean isOrigin() {
+
+		return ((0 == x) && (0 == y));
 	}
 }

@@ -11,3 +11,4 @@ public class MazeModel {
 	public Map<Coordinate, MazeCell> cells;
 
 }
+
