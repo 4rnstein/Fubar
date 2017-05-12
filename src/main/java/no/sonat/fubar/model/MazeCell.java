@@ -2,7 +2,6 @@ package no.sonat.fubar.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import no.sonat.fubar.agent.Move;
 
@@ -50,5 +49,11 @@ public class MazeCell {
 			move.add(Move.WEST);
 		}
 		return move;
+	}
+
+	public Move getDeadEndDirection() {
+		Move m = null;
+
+		return m;
 	}
 }

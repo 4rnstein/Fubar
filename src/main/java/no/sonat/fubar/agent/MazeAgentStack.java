@@ -28,22 +28,29 @@ public class MazeAgentStack {
 	}
 
 	public Move makeMove(MazeCell cell) {
+		List<Move> moves = cell.possibleMoves();
 		if (null == position) {
 			position = new Coordinate(0, 0);
-		}
-		model.putCellAt(cell);
-		List<Move> moves = cell.possibleMoves();
-		Move move = Move.WEST;
-		;
-		if (moves.size() > 1) {
-			do {
-				move = moves.get(r.nextInt(moves.size()));
-			} while (lastMove == move.oposite());
+			lastMove = moves.get(r.nextInt(moves.size()));
+			model.putCellAt(cell);
+			Move move = lastMove;
+			stack.push(new StackStep(move));
+			return lastMove;
 		} else {
-			move = lastMove.oposite();
+			model.putCellAt(cell);
+
+			Move move = Move.WEST;
+
+			if (moves.size() > 1) {
+				do {
+					move = moves.get(r.nextInt(moves.size()));
+				} while (lastMove == move.oposite());
+			} else {
+				move = lastMove.oposite();
+			}
+			stack.push(new StackStep(move));
+			return move;
 		}
-		stack.push(new StackStep(move));
-		return move;
 	}
 
 }
