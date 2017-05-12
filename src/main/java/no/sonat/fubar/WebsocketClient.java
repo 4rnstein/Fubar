@@ -1,19 +1,20 @@
 package no.sonat.fubar;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.net.URI;
-import java.util.concurrent.TimeUnit;
-import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
-import org.eclipse.jetty.websocket.client.WebSocketClient;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.StatusCode;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
+import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 /**
  * Websocket klient eksempel.
@@ -27,39 +28,51 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
  *
  */
 public class WebsocketClient {
-    public static void main(String[] args) {
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
+
+    private String ClientId;
+
+
+    public WebsocketClient(){
 
         String username = "ateam";
-        String gameId = "7115";
+        String gameId = "1688";
         String destUri = String.format("ws://sonatmazeserver.azurewebsites.net/api/Maze/MazePlayer?username=%s&gameId=%s",username,gameId);
-        if (args.length > 0) {
-            destUri = args[0];
-        }
+
         WebSocketClient client = new WebSocketClient();
         SimpleEchoSocket socket = new WebsocketClient.SimpleEchoSocket();
+
         try {
             client.start();
             URI echoUri = new URI(destUri);
             ClientUpgradeRequest request = new ClientUpgradeRequest();
             client.connect(socket, echoUri, request);
+
+            socket.
+
             System.out.printf("Connecting to : %s%n", echoUri);
-            socket.awaitClose(5, TimeUnit.SECONDS);
+            //socket.awaitClose(5, TimeUnit.SECONDS);
         } catch (Throwable t) {
             t.printStackTrace();
-        } finally {
-            try {
-                client.stop();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//        } finally {
+//            try {
+//                client.stop();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
+    }
+
+    public static void main(String[] args) {
+         new WebsocketClient();
     }
 
     /**
      * Basic Echo Client Socket
      */
     @WebSocket(maxTextMessageSize = 64 * 1024)
-    public static class SimpleEchoSocket {
+    public static   class SimpleEchoSocket {
 
         private final CountDownLatch closeLatch;
 
@@ -97,6 +110,14 @@ public class WebsocketClient {
 
         @OnWebSocketMessage
         public void onMessage(String msg) {
+
+            try {
+                Message obj = objectMapper.readValue(msg,Message.class);
+                System.out.println(obj.ClientId);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             System.out.printf("Got msg: %s%n", msg);
         }
     }
