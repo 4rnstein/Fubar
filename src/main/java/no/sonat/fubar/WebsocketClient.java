@@ -49,7 +49,7 @@ public class WebsocketClient {
             ClientUpgradeRequest request = new ClientUpgradeRequest();
             client.connect(socket, echoUri, request);
 
-            socket.
+
 
             System.out.printf("Connecting to : %s%n", echoUri);
             //socket.awaitClose(5, TimeUnit.SECONDS);

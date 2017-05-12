@@ -1,5 +1,7 @@
 package no.sonat.fubar;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by helgeskjellevik on 12/05/2017.
  */
