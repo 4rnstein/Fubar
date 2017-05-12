@@ -7,11 +7,8 @@ package no.sonat.fubar;
  */
 public final class MazeRunner {
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws Exception {
 
-
-            new WebsocketClient("3371");
-
-
+        new MazeClient("2585", "ateam");
     }
 }

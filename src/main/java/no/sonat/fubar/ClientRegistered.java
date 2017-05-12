@@ -5,7 +5,7 @@ package no.sonat.fubar;
  * User: AC30788 | Arnstein Flemmen
  * Date: 12.05.2017
  */
-public class Message {
+public class ClientRegistered {
     public String Action;
     public String ClientId;
     public String GameId;
