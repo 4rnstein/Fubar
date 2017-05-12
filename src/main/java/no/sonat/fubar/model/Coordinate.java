@@ -10,7 +10,7 @@ public class Coordinate {
 
 	@Override
 	public int hashCode() {
-		return x ^ (y * 10000);
+		return x ^ (y * 31);
 	}
 
 	@Override
@@ -25,5 +25,9 @@ public class Coordinate {
 	public boolean isOrigin() {
 
 		return ((0 == x) && (0 == y));
+	}
+
+	public Coordinate copy() {
+		return new Coordinate(x, y);
 	}
 }
