@@ -48,6 +48,7 @@ public class MazeAgentStack {
 			} else {
 				move = lastMove.oposite();
 			}
+			lastMove = move;
 			stack.push(new StackStep(move));
 			return move;
 		}

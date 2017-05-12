@@ -52,7 +52,9 @@ public class MazeClient {
                 System.out.println("ClientId: " + ClientId);
             } else if (msg.contains("NextMove")) {
                 final NextMove nextMove = objectMapper.readValue(msg, NextMove.class);
-                session.getRemote().sendStringByFuture(objectMapper.writeValueAsString(getNextMove(nextMove)));
+                MovePlayer nextMove1 = getNextMove(nextMove);
+                System.out.println("Moving " + nextMove1.Direction);
+                session.getRemote().sendStringByFuture(objectMapper.writeValueAsString(nextMove1));
             }
         } catch (final IOException e) {
             e.printStackTrace();
