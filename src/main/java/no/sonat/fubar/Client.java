@@ -44,6 +44,9 @@ public class Client {
 
     public static void main(String[] args) throws Exception {
         new Client().connect("ateeam", "7751");
+
+
+        Thread.sleep(1000000);
     }
 
     private void onOpenEvent() {
