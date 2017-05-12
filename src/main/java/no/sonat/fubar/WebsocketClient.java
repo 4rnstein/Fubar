@@ -28,7 +28,10 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
  */
 public class WebsocketClient {
     public static void main(String[] args) {
-        String destUri = "ws://echo.websocket.org";
+
+        String username = "ateam";
+        String gameId = "7115";
+        String destUri = String.format("ws://sonatmazeserver.azurewebsites.net/api/Maze/MazePlayer?username=%s&gameId=%s",username,gameId);
         if (args.length > 0) {
             destUri = args[0];
         }
