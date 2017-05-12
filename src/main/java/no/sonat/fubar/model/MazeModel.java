@@ -24,4 +24,8 @@ public class MazeModel {
 	public MazeCell getCellAt(int x, int y) {
 		return getCellAt(new Coordinate(x, y));
 	}
+
+	public void putCellAt(MazeCell cell) {
+		cells.put(cell.pos, cell);
+	}
 }
