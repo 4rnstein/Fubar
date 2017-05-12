@@ -9,6 +9,6 @@ public final class MazeRunner {
 
     public static void main(final String[] args) throws Exception {
 
-        new MazeClient("2585", "ateam");
+        new MazeClient("7207", "ateam");
     }
 }

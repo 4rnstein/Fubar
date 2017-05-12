@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import no.sonat.fubar.agent.MazeAgent;
+import no.sonat.fubar.agent.MazeAgentStack;
 import no.sonat.fubar.agent.Move;
 import no.sonat.fubar.model.MazeModel;
 import org.eclipse.jetty.websocket.api.Session;
@@ -20,7 +20,7 @@ import org.eclipse.jetty.websocket.client.WebSocketClient;
 public class MazeClient {
     private final ObjectMapper objectMapper;
     private final CountDownLatch closeLatch;
-    private final MazeAgent mazeAgent;
+    private final MazeAgentStack mazeAgent;
     private final String GameId;
 
     private String ClientId;
@@ -30,7 +30,7 @@ public class MazeClient {
         this.GameId = GameId;
         this.closeLatch = new CountDownLatch(1);
         this.objectMapper = new ObjectMapper();
-        this.mazeAgent = new MazeAgent(new MazeModel());
+        this.mazeAgent = new MazeAgentStack(new MazeModel());
 
         final WebSocketClient client = new WebSocketClient();
         client.start();
@@ -45,6 +45,7 @@ public class MazeClient {
     @SuppressWarnings("unused")
     @OnWebSocketMessage
     public void onMessage(final String msg) {
+        System.out.printf("Got msg: %s%n", msg);
         try {
             if (msg.contains("ClientRegistered")) {
                 ClientId = objectMapper.readValue(msg, ClientRegistered.class).ClientId;
@@ -56,7 +57,7 @@ public class MazeClient {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-        System.out.printf("Got msg: %s%n", msg);
+
     }
 
     @SuppressWarnings("unused")
