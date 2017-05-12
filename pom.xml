@@ -7,5 +7,11 @@
     <groupId>Fubar</groupId>
     <artifactId>Fubar</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-client</artifactId>
+            <version>9.3.2.v20150730</version>
+        </dependency>
+    </dependencies>
 </project>
